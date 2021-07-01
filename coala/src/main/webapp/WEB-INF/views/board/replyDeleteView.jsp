@@ -28,7 +28,7 @@
 	</script>
 	<body>
 	
-		<div id="root">
+		<div class="container">
 			<header>
 				<h1> 게시판</h1>
 			</header>
@@ -50,8 +50,8 @@
 						
 					<div>
 						<p>삭제 하시겠습니까?</p>
-						<button type="submit" class="delete_btn">예 삭제합니다.</button>
-						<button type="button" class="cancel_btn">아니오. 삭제하지 않습니다.</button>
+						<button type="submit" class="delete_btn btn btn-danger">예 삭제합니다.</button>
+						<button type="button" class="cancel_btn btn btn-primary">아니오. 삭제하지 않습니다.</button>
 					</div>
 				</form>
 			</section>

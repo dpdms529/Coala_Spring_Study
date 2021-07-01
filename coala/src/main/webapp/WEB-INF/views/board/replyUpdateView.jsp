@@ -28,7 +28,7 @@
 		})
 	</script>
 	<body>
-		<div id="root">
+		<div class="container">
 			<header>
 				<h1>게시판</h1>
 			</header>
@@ -47,18 +47,22 @@
 					<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum }" />
 					<input type="hidden" id="searchType" name="searchType" value="${scri.searchType }" />
 					<input type="hidden" id="keyword" name="keyword" value="${scri.keyword }" />
+					<div class="form-group">
+						<label for="content" class="col-sm-2 control-label">댓글 내용</label>
+						<input type="text" id="content" name="content" class="form-control" value="${replyUpdate.content }" />
+					</div>
 					<table>
 						<tbody>
 							<tr>
 								<td>
-									<label for="content">댓글 내용</label><input type="text" id="content" name="content" value="${replyUpdate.content }" />
+									
 								</td>
 							</tr>
 						</tbody>
 					</table>
 					<div>
-						<button type="submit" class="update_btn">저장</button>
-						<button type="button" class="cancel_btn">취소</button>
+						<button type="submit" class="update_btn btn btn-success">저장</button>
+						<button type="button" class="cancel_btn btn btn-primary">취소</button>
 					</div>
 				</form>
 			</section>
