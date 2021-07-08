@@ -47,21 +47,27 @@
 			
 			<section id = "container">
 				<form name="writeForm" method = "post" action = "/board/write">
-					<div class="form-group">
-						<label for = "title" class="col-sm-2 control-label">제목</label>
-						<input type = "text" id = "title" name = "title" class="chk form-control" title="제목을 입력하세요."/>
-					</div>
-					<div class="form-group">
-						<label for = "content" class="col-sm-2 control-label">내용</label>
-						<textarea id = "content" name = "content" class="chk form-control" title="내용을 입력하세요"></textarea>
-					</div>
-					<div class="form-group">
-						<label for = "writer" class="col-sm-2 control-label">작성자</label>
-						<input type = "text" id = "writer" name = "writer" class="chk form-control" title="작성자를 입력하세요"/>	
-					</div>
-					<div>
-						<button type="button" class="write_btn btn btn-success" >작성</button>
-					</div>
+					<c:if test="${member.userId != null }">
+						<div class="form-group">
+							<label for = "title" class="col-sm-2 control-label">제목</label>
+							<input type = "text" id = "title" name = "title" class="chk form-control" title="제목을 입력하세요."/>
+						</div>
+						<div class="form-group">
+							<label for = "content" class="col-sm-2 control-label">내용</label>
+							<textarea id = "content" name = "content" class="chk form-control" title="내용을 입력하세요"></textarea>
+						</div>
+						<div class="form-group">
+							<label for = "writer" class="col-sm-2 control-label">작성자</label>
+							<!-- <input type = "text" id = "writer" name = "writer" class="chk form-control" title="작성자를 입력하세요"/> -->	
+							<input type="text" id="writer" name="writer" class="form-control" value="${member.userId}" readonly="readonly" />
+						</div>
+						<div>
+							<button type="button" class="write_btn btn btn-success" >작성</button>
+						</div>
+					</c:if>
+					<c:if test="${member.userId == null }">
+						<p>로그인 후에 작성하실 수 있습니다.</p>
+					</c:if>
 				</form>
 			</section>
 			<hr />

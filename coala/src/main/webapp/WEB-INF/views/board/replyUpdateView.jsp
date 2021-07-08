@@ -51,15 +51,6 @@
 						<label for="content" class="col-sm-2 control-label">댓글 내용</label>
 						<input type="text" id="content" name="content" class="form-control" value="${replyUpdate.content }" />
 					</div>
-					<table>
-						<tbody>
-							<tr>
-								<td>
-									
-								</td>
-							</tr>
-						</tbody>
-					</table>
 					<div>
 						<button type="submit" class="update_btn btn btn-success">저장</button>
 						<button type="button" class="cancel_btn btn btn-primary">취소</button>
