@@ -4,12 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boardMapper">
 	<!-- 게시판 글 작성 -->
-	<insert id = "insert">
+	<insert id = "insert" parameterType="kr.co.vo.BoardVO" useGeneratedKeys="true" keyProperty="bno">
+		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
+			SELECT MP_BOARD_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT INTO MP_BOARD(BNO
 							, TITLE
 							, CONTENT
 							, WRITER)
-				VALUES (MP_BOARD_SEQ.NEXTVAl
+				VALUES (  #{bno}
 						, #{title}
 						, #{content}
 						, #{writer})
@@ -46,6 +49,39 @@
    			FROM MP_BOARD
    			WHERE BNO = #{bno}
    	</delete>
+   	
+   	<insert id="insertFile" parameterType="hashMap">
+   		INSERT INTO MP_FILE(
+   			FILE_NO,
+   			BNO,
+   			ORG_FILE_NAME,
+   			STORED_FILE_NAME,
+   			FILE_SIZE
+   		)VALUES(
+   			SEQ_MP_FILE_NO.NEXTVAL,
+   			#{BNO},
+   			#{ORG_FILE_NAME},
+   			#{STORED_FILE_NAME},
+   			#{FILE_SIZE}
+   		)
+   	</insert>
+   	
+   	<select id ="selectFileList" parameterType="int" resultType="hashMap">
+   		SELECT FILE_NO,
+   			   ORG_FILE_NAME,
+   			   ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+   		  FROM MP_FILE
+   		 WHERE BNO = #{BNO}
+   		   AND DEL_GB = 'N'
+   	</select>
+   	
+   	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+   		SELECT
+   			STORED_FILE_NAME,
+   			ORG_FILE_NAME
+   		FROM MP_FILE
+   		WHERE FILE_NO = #{FILE_NO}
+   	</select>
    	
    	<select id="listPage" resultType="kr.co.vo.BoardVO" parameterType="kr.co.vo.SearchCriteria">
    		SELECT	BNO,

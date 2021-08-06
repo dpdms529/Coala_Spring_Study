@@ -20,22 +20,37 @@
 						    
 			})
 		
-			$("#submit").on("click", function(){
+			$("#deleteMemberBtn").on("click", function(){
 				if($("#userPass").val()==""){
 					alert("비밀번호를 입력해주세요.");
 					$("#userPass").focus();
 					return false;
 				}	
-			});
-			
 				
+				$.ajax({
+					url : "/member/passChk",
+					type : "POST",
+					dataType : "json",
+					data : $("#delForm").serializeArray(),
+					success : function(data){
+						if(data==true){
+							if(confirm("회원탈퇴하시겠습니까?")){
+								$("#delForm").submit();
+							}
+						}else{
+							alert("패스워드가 틀렸습니다.");
+							return;
+						}
+					}
+				})
+			});
 			
 		})
 	</script>
 	<body>
 		<div class="container">
 			<section id="container">
-				<form action="/member/memberDelete" method="post">
+				<form action="/member/memberDelete" method="post" id="delForm">
 					<div class="form-group has-feedback">
 						<label class="control-label" for="userId">아이디</label>
 						<input class="form-control" type="text" id="userId" name="userId" value="${member.userId}" readonly="readonly"/>
@@ -48,11 +63,11 @@
 						<label class="control-label" for="userName">성명</label>
 						<input class="form-control" type="text" id="userName" name="userName" value="${member.userName}" readonly="readonly"/>
 					</div>
+				</form>
 					<div class="form-group has-feedback">
-						<button class="btn btn-success" type="submit" id="submit">회원탈퇴</button>
+						<button class="btn btn-success" type="button" id="deleteMemberBtn">회원탈퇴</button>
 						<button class="cancel btn btn-danger" type="button">취소</button>
 					</div>
-				</form>
 				<div>
 					<c:if test="${msg == false}">
 						비밀번호가 맞지 않습니다.
